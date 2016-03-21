@@ -1,0 +1,154 @@
+@unit:200rem;
+@sprites:"../img/sprites.png";
+
+.mx_sprites () {
+    background-image: url(@sprites);
+    background-repeat: no-repeat;
+    background-size: 400 / @unit 400 / @unit;
+}
+
+.cityselector {
+    font-size:.14rem;
+    font:14px/1.5'\5FAE\8F6F\96C5\9ED1';
+    color:#000;
+    -webkit-text-size-adjust:100%!important;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99997;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li {
+            margin: 0;
+            padding: 0;
+            a {
+                text-decoration:none;
+            }
+        }
+    }
+    .search {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:94 / @unit;
+        background:#f7f7f7;
+        z-index:2;
+        input {
+            display:block;
+            box-sizing:border-box;
+            background:transparent;
+            border:2 / @unit #ebebeb solid;
+            height:62 / @unit;
+            line-height:62 / @unit;
+            border-radius:8 / @unit;
+            width:90%;
+            margin:14 / @unit auto;
+            padding-left:46 / @unit;
+            &:placeholder {
+                color:#b4b4b4;
+            }
+        }
+        &:before {
+            content:"";
+            position:absolute;
+            display: inline-block;
+            top:14 / @unit;
+            left:5%;
+            width: 56 / @unit;
+            height: 60 / @unit;
+            .mx_sprites;
+            background-position: 0 -310 / @unit;
+        }
+    }
+    .city-local {
+        position:fixed;
+        box-sizing:border-box;
+        top:94 / @unit;
+        width:100%;
+        padding:0 28 / @unit;
+        background-color: #fff;
+        height: 86 / @unit;
+        line-height: 86 / @unit;
+        font-size: 32 / @unit;
+        z-index:2;
+    }
+    .city-wrap {
+        margin-top:184 / @unit;
+        overflow: auto;
+        height: 100%;
+    }
+    .city-title {
+        padding-left: 28 / @unit;
+        color:#959595;
+    }
+    .city-list {
+        border-top: 2 / @unit solid #efefef;
+        border-bottom: 2 / @unit solid #efefef;
+        padding:0 28 / @unit;
+        background-color: #fff;
+        &-item {
+            border-bottom: 2 / @unit solid #efefef;
+            position: relative;
+            height: 86 / @unit;
+            line-height: 86 / @unit;
+            color: #000;
+            font-size: 32 / @unit;
+            &:last-child {
+                border-bottom: none;
+            }
+            .cm-icon-arrow {
+                position: absolute;
+                right: 32 / @unit;
+                top: 50%;
+                width: 20 / @unit;
+                height: 20 / @unit;
+                margin-top: -14 / @unit;
+            }
+        }
+        .tips {
+            padding-top: 12 / @unit;
+        }
+    }
+    .anchor-list {
+        position:fixed;
+        top:184 / @unit;
+        right:0;
+        height:80%;
+        z-index: 99998;
+        .active {
+            background: rgba(0, 0, 0, .2);
+            color: white;
+            a {
+                color: white;
+            }
+        }
+        li {
+            width:42 / @unit;
+            text-align:center;
+            font-size:24/@unit;
+            color:#107ecb;
+            height:3.85%;
+            line-height:28 / @unit;
+            min-height:28 / @unit;
+        }
+    }
+    .item-tip {
+        position: fixed;
+        z-index: 99999;
+        top: .92rem;
+        right: .24rem;
+        width: 50px;
+        line-height: 50px;
+        font-size: 34px;
+        font-family: Microsoft Yahei;
+        text-align: center;
+        background: #5cb642;
+        color: white;
+    }
+}

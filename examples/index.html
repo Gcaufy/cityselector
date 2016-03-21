@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>测试页面</title>
+    <link rel="stylesheet" href="../dist/css/cityselector.min.css" />
+
+    <script src="//cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+    <script src="../dist/js/cityselector.min.js"></script>
+    <script src="mock.js"></script>
+    <style type="text/css">
+    html {
+        font-size:100px;
+    }
+    body {
+        font-size: .14rem;
+    }
+    </style>
+  </head>
+
+
+<body>
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>请在移动端打开测试</i>
+<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击切换城市, 所在城市: <a href="javascript:;" id="city">定位中...</a>
+<br /><br /><br /><br />
+<pre>
+    Code: 
+    
+    $('#city').cityselector({dataSource: 'mock.json'});
+</pre>  
+<script>
+// $('#city').cityselector({dataSource: d});
+$('#city').cityselector({dataSource: 'mock.json'});
+/*$('#city').cityselector('intercept', 'csi:getLocation', function () {
+    return '黄冈';
+})*/
+</script>
+
+</body>
+</html>
