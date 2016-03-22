@@ -3,7 +3,7 @@ City Selector
 
 cityselector 是一个基于zepto的移动端手机城市选择器, 支持首字母查询.
 
-![Alt text](https://dn-coding-net-production-file.qbox.me/eb86426e-fc30-48f7-bc0c-6eca59948c3e.png?imageView2/2/w/1440/h/0&e=1458547975&token=goE9CtaiT5YaIP6ZQ1nAafd_C1Z_H2gVP8AwuC-5:oTDzHX5RT_6p_wal096Pq3eP6lc=)
+![Alt text](http://km.oa.com/files/attachments_1/238/121238/b51d1c87ffca9be50b7d44a7341733c0.png)
 
 线上DEMO: [http://www.madcoder.cn/demos/cityselector/examples/index.html](http://www.madcoder.cn/demos/cityselector/examples/index.html)
 
