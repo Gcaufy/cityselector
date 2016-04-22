@@ -168,7 +168,8 @@
                     self.select(v);
                 });
                 self.dom.on('click', '#current', function (e) {
-                    self.select(self.currentLocation);
+                    if (self.currentLocation)
+                        self.select(self.currentLocation);
                 });
                 self.target.on('click', function (e) {
                     self.open();
@@ -258,9 +259,10 @@
         },
         scrollTo: function (cate) {
             var wrap = this.dom.find('.city-wrap'),
-                cateDom = this.dom.find('#category-' + cate);
+                cateDom = this.dom.find('#category-' + cate),
+                padding = this.dom.find('.search').height() + this.dom.find('.city-local').height();
             if (cateDom.length) {
-                wrap[0].scrollTop = wrap[0].scrollTop - wrap.offset().top + cateDom.offset().top;
+                wrap[0].scrollTop = wrap[0].scrollTop - padding + cateDom.offset().top;
                 this.dom.find('.item-tip').html(cate);
             }
         },
@@ -291,7 +293,7 @@
                 node.onload = function () {
                     var data = window.remote_ip_info;
                     delete window['remote_ip_info'];
-                    self.select(data.city);
+                    self.select(data.province);
                     self.setLocation();
                     if (typeof(cb) === 'function') {
                         cb(self.current);
@@ -304,8 +306,12 @@
             var self = this;
             location = location || self.current;
             self.currentLocation = location;
-            if (self.dom)
-                self.dom.find('#current').html(self.current.name);
+            if (self.dom) {
+                if (!self.current) {
+                    self.dom.find('#current').html('定位失败');
+                } else 
+                    self.dom.find('#current').html(self.current.name);
+            }
             else 
                 self.target.one('cse:initialized', function () {
                     self.dom.find('#current').html(self.current.name);
@@ -341,7 +347,7 @@
             }
             inst = _inst[this.data('init')];
             if (typeof(inst[arguments[0]]) === 'function') {
-                inst[arguments[0]].apply(inst[arguments[0]], Array.prototype.slice.call(arguments, 1));
+                inst[arguments[0]].apply(inst, Array.prototype.slice.call(arguments, 1));
             } else {
                 throw arguments[0] + ' is not implemented.';
             }
