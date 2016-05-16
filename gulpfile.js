@@ -20,4 +20,8 @@ gulp.task('less', function () {
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('dist/css'));
 });
+gulp.task('watch', function (cb) {
+    gulp.watch('src/js/cityselector.js', ['js']);
+    gulp.watch('src/css/cityselector.less', ['less']);
+});
 gulp.task('default', ['js', 'less']);
