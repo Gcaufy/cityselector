@@ -6,7 +6,11 @@
         sort: function (d) {
             if (!d.length || typeof(d) !== 'object')
                 return null;
-            return d.sort(function (a, b) {
+            return d.map(function (v) {
+                v.spell = v.alpha.replace(/\-/ig, '');
+                v.initial = v.alpha.split('-').map(function (a) { return a[0]; }).join('');
+                return v;
+            }).sort(function (a, b) {
                 return ((a.alpha[0] ? a.alpha[0].charCodeAt() : 0) - (b.alpha[0] ? b.alpha[0].charCodeAt() : 0));
             });
         },
@@ -127,14 +131,14 @@
             dataSource.forEach(function (list, i) {
                 cate = list.alpha[0] ? list.alpha[0] : '';
                 if (lastCate && cate !== lastCate && !isSearch) {
-                    strCate += CitySelector.template.CATEGORY.replace(/{category}/g, lastCate).replace('@@CITYLIST@@', strCity);
+                    strCate += CitySelector.template.CATEGORY.replace(/{category}/g, lastCate.toUpperCase()).replace('@@CITYLIST@@', strCity);
                     strCity = '';
                 }
                 strCity += CitySelector.template.CITYLIST.replace(/{key}/g, list.key).replace(/{name}/g, list.name);
                 lastCate = cate;
             });
             if (!isSearch) {
-                strCate += CitySelector.template.CATEGORY.replace(/{category}/g, lastCate).replace('@@CITYLIST@@', strCity);
+                strCate += CitySelector.template.CATEGORY.replace(/{category}/g, lastCate.toUpperCase()).replace('@@CITYLIST@@', strCity);
                 i = -1;
                 while(++i < 26) {
                     cate = String.fromCharCode(65 + i);
@@ -232,9 +236,9 @@
         },
         search: function (text) {
             var self = this, data = self.dataSource;
-            text = text ? text.toUpperCase() : text;
+            text = text ? text.toLowerCase() : text;
             data = !text ? data : data.filter(function (city) {
-                return city.key === 'text' || city.alpha.indexOf(text) !== -1 || city.name.indexOf(text) !== -1;
+                return city.key === text || city.initial.indexOf(text) === 0 || city.spell.indexOf(text) === 0 || city.name.indexOf(text) !== -1;
             });
             this.render(text ? data : undefined);
         },

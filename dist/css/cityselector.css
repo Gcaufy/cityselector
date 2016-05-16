@@ -76,6 +76,7 @@
   margin-top: 0.92rem;
   overflow: auto;
   height: 100%;
+  background-color: white;
 }
 .cityselector .city-title {
   padding-left: 0.14rem;
