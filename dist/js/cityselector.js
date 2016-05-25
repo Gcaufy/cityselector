@@ -14,12 +14,19 @@
                 return ((a.alpha[0] ? a.alpha[0].charCodeAt() : 0) - (b.alpha[0] ? b.alpha[0].charCodeAt() : 0));
             });
         },
-        pick: function (d, text) {
+        find: function (d, text, useKey) {
             var i = 0, l = d.length, rst = null;
             for (i = 0; i < l; i++) {
-                if (d[i].name.indexOf(text) === 0) {
-                    rst = d[i];
-                    break;
+                if (useKey) {
+                    if (d[i].key === text) {
+                        rst = d[i];
+                        break;
+                    }
+                } else {
+                    if (d[i].name.indexOf(text) === 0) {
+                        rst = d[i];
+                        break;
+                    }
                 }
             }
             return rst;
@@ -165,11 +172,7 @@
                     self.search(v);
                 });
                 self.dom.on('click', '.city-list-item', function (e) {
-                    var v = {
-                        key: $(this).attr('data'),
-                        name: $(this).text()
-                    };
-                    self.select(v);
+                    self.pick($(this).attr('data'));
                 });
                 self.dom.on('click', '#current', function (e) {
                     if (self.currentLocation)
@@ -242,6 +245,18 @@
             });
             this.render(text ? data : undefined);
         },
+        pick: function (v) {
+            var self = this;
+            v = CS.find(self.dataSource, v, true);
+            if (v === null)
+                return;
+            if (!self.current || self.current.key !== v.key)
+                self.target.trigger('cse:changed', v);
+
+            self.current = v;
+            self.target.html(v.name);
+            self.close();
+        },
         select: function (v) {
             var self = this;
             if (typeof(v) === 'string') {
@@ -250,7 +265,7 @@
                         self.select(v);
                     }, 500);
                 } else
-                    v = CS.pick(self.dataSource, v);
+                    v = CS.find(self.dataSource, v);
             }
             if (v === null)
                 return;
