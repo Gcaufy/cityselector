@@ -41,6 +41,8 @@
                 rst = JSON.parse(rst);
                 if (expire === true || rst.time && rst.data && (+new Date - rst.time) / 1000 < expire) {
                     return rst.data;
+                } else {
+                    rst = null;
                 }
             } catch (e) {
             }
